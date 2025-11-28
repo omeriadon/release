@@ -17,7 +17,7 @@ import { CalendarClock } from "lucide-react";
 
 export async function getLastModifiedTime(path: string): Promise<string> {
 	if (process.env.NODE_ENV === "development") {
-		return "Last updated: Dev placeholder"; // <- must return
+		return "Updated: Dev placeholder"; // <- must return
 	}
 
 	const time = await getGithubLastEdit({
@@ -29,8 +29,8 @@ export async function getLastModifiedTime(path: string): Promise<string> {
 
 	if (!time) return "Unknown";
 	return time instanceof Date
-		? "Last updated: " + time.toLocaleDateString("en-GB", { dateStyle: "long" })
-		: String("Last updated: " + time);
+		? "Updated: " + time.toLocaleDateString("en-GB", { dateStyle: "long" })
+		: String("Updated: " + time);
 }
 
 export default async function Page(props: PageProps<"/docs/[...slug]">) {
@@ -50,13 +50,22 @@ export default async function Page(props: PageProps<"/docs/[...slug]">) {
 			breadcrumb={{ enabled: true, includePage: true, includeRoot: true }}
 		>
 			<DocsTitle>{page.data.title}</DocsTitle>
-			<div className="flex gap-3 text-xs!">
-				<LLMCopyButton markdownUrl={`${page.url}.mdx`} />
-				<ViewOptions
-					markdownUrl={`${page.url}.mdx`}
-					githubUrl={`https://github.com/omeriadon/immune/tree/main/content/docs/${page.path}`}
-					markdownContent={markdownContent}
-				/>
+
+			<div className="flex gap-3 items-center">
+				<div className="flex gap-3 items-center">
+					<LLMCopyButton markdownUrl={`${page.url}.mdx`} />
+
+					<ViewOptions
+						markdownUrl={`${page.url}.mdx`}
+						githubUrl={`https://github.com/omeriadon/immune/tree/main/content/docs/${page.path}`}
+						markdownContent={markdownContent}
+					/>
+				</div>
+
+				<div className="flex items-center opacity-50 gap-1 ml-auto text-xs">
+					<CalendarClock size={16} />
+					<p>{await getLastModifiedTime(page.path)}</p>
+				</div>
 			</div>
 
 			<DocsDescription>{page.data.description}</DocsDescription>
@@ -70,11 +79,6 @@ export default async function Page(props: PageProps<"/docs/[...slug]">) {
 					})}
 				/>
 			</DocsBody>
-
-			<div className="opacity-50 mt-40 flex gap-1">
-				<CalendarClock className="scale-90" />
-				<p>{await getLastModifiedTime(page.path)}</p>
-			</div>
 		</DocsPage>
 	);
 }
