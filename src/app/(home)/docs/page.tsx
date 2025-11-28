@@ -1,7 +1,7 @@
 import Link, { type LinkProps } from "next/link";
 import {
 	Baby,
-	CirclePower,
+	Power,
 	PersonStanding,
 	Replace,
 } from "lucide-react";
@@ -18,7 +18,7 @@ export default function DocsPage() {
 					{
 						name: "Introduction",
 						description: "About, structure, how to navigate",
-						icon: <CirclePower className="size-full" />,
+						icon: <Power className="size-full" />,
 						href: "/docs/introduction",
 					},
 					{

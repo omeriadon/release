@@ -38,9 +38,6 @@ export default async function Page(props: PageProps<"/docs/[...slug]">) {
 
 	const page = slug?.length ? source.getPage(slug) : source.getPage([""]);
 
-	console.log("slug:", slug);
-	console.log("page:", page);
-
 	if (!page) notFound();
 
 	const markdownContent = await getLLMText(page);

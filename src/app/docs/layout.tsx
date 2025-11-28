@@ -33,6 +33,7 @@ export default function Layout({ children }: LayoutProps<"/docs">) {
 						<span className="font-medium text-2xl text-fd-primary">Immune</span>
 					</>
 				),
+				
 			}}
 			sidebar={{
 				tabs: {
