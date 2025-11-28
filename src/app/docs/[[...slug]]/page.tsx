@@ -81,8 +81,10 @@ export async function generateMetadata(
 	return {
 		title: page.data.title,
 		description: page.data.description,
-		openGraph: {
-			images: getPageImage(page).url,
+		icons: {
+			icon: "/favicon.ico",
+			shortcut: "/favicon.ico",
+			apple: "/favicon.ico",
 		},
 	};
 }
