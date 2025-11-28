@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
-import { getPageImage, source } from "@/lib/source";
+import { source } from "@/lib/source";
+import { LLMCopyButton, ViewOptions } from "@/components/page-actions";
 import {
 	DocsBody,
 	DocsDescription,
@@ -48,9 +49,22 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
 				includeRoot: true,
 			}}
 		>
-			<DocsTitle>{page.data.title}</DocsTitle>
-
+			<div>
+				<DocsTitle>{page.data.title}</DocsTitle>
+				<div className="flex gap-3 text-xs!">
+					<LLMCopyButton markdownUrl={`${page.url}.mdx`} />
+					<ViewOptions
+						markdownUrl={`${page.url}.mdx`}
+						githubUrl={`https://github.com/omeriadon/immune/content/docs/${page.path}`}
+					/>
+				</div>
+			</div>
 			<DocsDescription>{page.data.description}</DocsDescription>
+
+			<hr className="border border-fd-ring w-full" />
+
+			<br />
+
 			<DocsBody>
 				<MDX
 					components={getMDXComponents({
