@@ -13,7 +13,6 @@ import { getMDXComponents } from "@/mdx-components";
 import type { Metadata } from "next";
 import { createRelativeLink } from "fumadocs-ui/mdx";
 import { getGithubLastEdit } from "fumadocs-core/content/github";
-
 import { CalendarClock } from "lucide-react";
 
 export async function getLastModifiedTime(path: string): Promise<string> {
@@ -34,10 +33,13 @@ export async function getLastModifiedTime(path: string): Promise<string> {
 		: String("Last updated: " + time);
 }
 
-export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
+export default async function Page(props: PageProps<"/docs/[...slug]">) {
 	const { slug } = await props.params;
 
-	const page = slug?.length ? source.getPage(slug) : source.getPage(["index"]);
+	const page = slug?.length ? source.getPage(slug) : source.getPage([""]);
+
+	console.log("slug:", slug);
+	console.log("page:", page);
 
 	if (!page) notFound();
 
@@ -81,7 +83,7 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
 }
 
 export async function generateMetadata(
-	props: PageProps<"/docs/[[...slug]]">,
+	props: PageProps<"/docs/[...slug]">,
 ): Promise<Metadata> {
 	const { slug } = await props.params;
 	const page = slug?.length ? source.getPage(slug) : source.getPage(["index"]);
