@@ -3,6 +3,7 @@ import { baseOptions } from "@/lib/layout.shared";
 import { createElement } from "react";
 import { icons } from "lucide-react";
 import { source } from "@/lib/source";
+import { Logo } from "./layout.shared";
 
 const reportIcon = createElement(icons["MessageCircle"]);
 
@@ -26,7 +27,14 @@ export default function Layout({ children }: LayoutProps<"/docs">) {
 				...base.nav,
 				enabled: true,
 				transparentMode: "always",
-				title: "Immune",
+				title: (
+					<>
+						<Logo />
+						<span className="font-medium in-[.uwu]:hidden max-md:hidden">
+							Immune
+						</span>
+					</>
+				),
 			}}
 			sidebar={{
 				tabs: {
