@@ -14,7 +14,6 @@ import { getGithubLastEdit } from "fumadocs-core/content/github";
 
 import { CalendarClock } from "lucide-react";
 
-
 export async function getLastModifiedTime(path: string): Promise<string> {
 	if (process.env.NODE_ENV === "development") {
 		return "Last updated: Dev placeholder"; // <- must return
@@ -49,7 +48,6 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
 				includeRoot: true,
 			}}
 		>
-
 			<DocsTitle>{page.data.title}</DocsTitle>
 
 			<DocsDescription>{page.data.description}</DocsDescription>
@@ -62,9 +60,8 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
 				/>
 			</DocsBody>
 			<div className="opacity-50 mt-40 flex gap-1">
-				<CalendarClock className="scale-90"/>
+				<CalendarClock className="scale-90" />
 				<p>{await getLastModifiedTime(page.path)}</p>
-
 			</div>
 		</DocsPage>
 	);
