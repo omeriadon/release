@@ -13,7 +13,8 @@ import { getMDXComponents } from "@/mdx-components";
 import type { Metadata } from "next";
 import { createRelativeLink } from "fumadocs-ui/mdx";
 import { getGithubLastEdit } from "fumadocs-core/content/github";
-import { CalendarClock } from "lucide-react";
+import { CalendarClock, ChevronRight } from "lucide-react";
+import { loader } from "fumadocs-core/source";
 
 export async function getLastModifiedTime(path: string): Promise<string> {
 	if (process.env.NODE_ENV === "development") {
@@ -33,6 +34,28 @@ export async function getLastModifiedTime(path: string): Promise<string> {
 		: String("Updated: " + time);
 }
 
+function getFolderName(slugSegment: string | number): string {
+	const tree = source.pageTree;
+
+	// Convert to string first
+	const segment = String(slugSegment);
+
+	for (const node of tree.children) {
+		if (node.type === "folder") {
+			const hasMatchingChild = node.children.some((child) => {
+				if (child.type === "page") {
+					return child.url.includes(segment);
+				}
+				return false;
+			});
+			if (hasMatchingChild && typeof node.name === "string") {
+				return node.name;
+			}
+		}
+	}
+	return segment.replace(/-/g, " ");
+}
+
 export default async function Page(props: PageProps<"/docs/[...slug]">) {
 	const { slug } = await props.params;
 
@@ -44,12 +67,66 @@ export default async function Page(props: PageProps<"/docs/[...slug]">) {
 
 	const MDX = page.data.body;
 
+	const breadcrumbArray: Array<{
+		type: "text" | "separator";
+		value: string;
+		slugIndex: number;
+	}> = [{ type: "text", value: "Docs", slugIndex: -1 }];
+
+	if (slug?.length) {
+		slug.forEach((segment, i) => {
+			breadcrumbArray.push({
+				type: "separator",
+				value: "$slash",
+				slugIndex: -1,
+			});
+			const folderTitle = getFolderName(segment);
+			breadcrumbArray.push({ type: "text", value: folderTitle, slugIndex: i });
+		});
+	}
+
 	return (
 		<DocsPage
 			toc={page.data.toc}
-			breadcrumb={{ enabled: true, includePage: true, includeRoot: true }}
+			breadcrumb={{
+				enabled: true,
+				component: (
+					<nav className="flex items-center gap-2">
+						{breadcrumbArray.map((item, index) => {
+							if (item.type === "separator") {
+								return (
+									<ChevronRight
+										key={`separator-${index}`}
+										className="size-4 text-fd-muted-foreground"
+									/>
+								);
+							}
+
+							const isLast = index === breadcrumbArray.length - 1;
+							const href =
+								item.slugIndex === -1
+									? "/docs"
+									: `/docs/${slug.slice(0, item.slugIndex + 1).join("/")}`;
+
+							return (
+								<a
+									key={`${item.value}-${index}`}
+									href={href}
+									className={
+										isLast
+											? "text-sm font-medium text-fd-primary capitalize"
+											: "text-sm text-fd-muted-foreground hover:text-fd-foreground capitalize"
+									}
+								>
+									{item.value}
+								</a>
+							);
+						})}
+					</nav>
+				),
+			}}
 		>
-			<DocsTitle>{page.data.title}</DocsTitle>
+			<DocsTitle className="text-fd-primary">{page.data.title}</DocsTitle>
 
 			<div className="flex gap-3 items-center">
 				<div className="flex gap-3 items-center">
