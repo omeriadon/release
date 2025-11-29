@@ -39,7 +39,7 @@ export default function Layout({ children }: LayoutProps<"/docs">) {
 					title: (
 						<>
 							<ShieldPlus
-								className="size-9 stroke-[2.5] text-fd-primary-foreground"
+								className="size-9 stroke-[2.5] text-fd-background"
 								fill="var(--color-fd-primary)"
 							/>
 							<span className="font-bold text-2xl text-fd-primary">Immune</span>
