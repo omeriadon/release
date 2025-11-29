@@ -5,7 +5,7 @@
 :root {
 	--fd-layout-width: 100vw;
 
-	--introduction-color: hsl(33, 100%, 50%);
+	--introduction-color: var(--color-fd-primary);
 	--adaptive-immunity-color: green;
 	--innate-immunity-color: hsl(250, 80%, 54%);
 	--immune-organs-tissues-color: red;
