@@ -8,7 +8,7 @@ export async function GET(
 	_req: Request,
 	ctx: { params: Promise<{ slug?: string[] }> },
 ) {
-	const { slug } = await ctx.params; // unwrap the promise
+	const { slug } = await ctx.params;
 	const slugs = slug ?? [];
 
 	const page = source.getPage(slugs);

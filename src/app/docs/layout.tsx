@@ -4,7 +4,6 @@ import { createElement } from "react";
 import { icons, ShieldPlus } from "lucide-react";
 import { source } from "@/lib/source";
 
-
 const reportIcon = createElement(icons["MessageCircle"]);
 
 export default function Layout({ children }: LayoutProps<"/docs">) {
@@ -33,7 +32,6 @@ export default function Layout({ children }: LayoutProps<"/docs">) {
 						<span className="font-medium text-2xl text-fd-primary">Immune</span>
 					</>
 				),
-				
 			}}
 			sidebar={{
 				tabs: {

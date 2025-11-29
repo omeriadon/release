@@ -1,10 +1,5 @@
 import Link, { type LinkProps } from "next/link";
-import {
-	Baby,
-	Power,
-	PersonStanding,
-	Replace,
-} from "lucide-react";
+import { Baby, Power, PersonStanding, Replace } from "lucide-react";
 
 export default function DocsPage() {
 	return (
