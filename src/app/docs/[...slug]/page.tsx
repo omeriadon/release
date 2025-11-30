@@ -141,7 +141,7 @@ export default async function Page(props: PageProps<"/docs/[...slug]">) {
 					/>
 				</div>
 
-				<div className="inline-flex items-center justify-center gap-2 rounded-md border bg-fd-secondary px-2 py-1.5 text-xs font-medium text-fd-secondary-foreground">
+				<div className="inline-flex items-center justify-center gap-2 rounded-md border px-1.5 py-1 text-xs font-medium text-fd-secondary-foreground">
 					<CalendarClock className="size-3.5 text-fd-muted-foreground" />
 					<p>{await getLastModifiedTime(page.path)}</p>
 				</div>
