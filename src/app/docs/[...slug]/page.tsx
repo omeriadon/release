@@ -164,12 +164,23 @@ export async function generateMetadata(
 	props: PageProps<"/docs/[...slug]">,
 ): Promise<Metadata> {
 	const { slug } = await props.params;
-	const page = slug?.length ? source.getPage(slug) : source.getPage(["index"]);
+
+	// try direct page
+	let page = slug?.length ? source.getPage(slug) : source.getPage(["index"]);
+
+	// if this is a folder and not a page, look for its index.md(x)
+	if (!page && slug?.length) {
+		const withIndex = [...slug, "index"];
+		page = source.getPage(withIndex);
+	}
+
 	if (!page) notFound();
 
+	const title = page.data.title ?? "Inidex";
+
 	return {
-		title: page.data.title,
-		description: page.data.description,
+		title: `${title} → Immune`,
+		description: page.data.description ?? "",
 		icons: {
 			icon: "/favicon.ico",
 			shortcut: "/favicon.ico",
