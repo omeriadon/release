@@ -68,46 +68,10 @@ export default async function Page(props: PageProps<"/docs/[...slug]">) {
 		<DocsPage
 			toc={page.data.toc}
 			tableOfContent={{
-				single: true,
-				style: "normal",
+				single: false,
+				style: "clerk",
 			}}
-			breadcrumb={{
-				enabled: true,
-				component: (
-					<nav className="flex items-center gap-2">
-						{breadcrumbArray.map((item, index) => {
-							if (item.type === "separator") {
-								return (
-									<ChevronRight
-										key={`separator-${index}`}
-										className="size-4 text-fd-muted-foreground"
-									/>
-								);
-							}
-
-							const isLast = index === breadcrumbArray.length - 1;
-							const href =
-								item.slugIndex === -1
-									? "/docs"
-									: `/docs/${slug.slice(0, item.slugIndex + 1).join("/")}`;
-
-							return (
-								<a
-									key={`${item.value}-${index}`}
-									href={href}
-									className={
-										isLast
-											? "text-sm font-medium text-fd-primary capitalize"
-											: "text-sm text-fd-muted-foreground hover:text-fd-foreground capitalize"
-									}
-								>
-									{item.value}
-								</a>
-							);
-						})}
-					</nav>
-				),
-			}}
+			
 		>
 			<DocsTitle className="text-fd-primary">{page.data.title}</DocsTitle>
 

@@ -13,37 +13,19 @@ export default function Layout({ children }: LayoutProps<"/docs">) {
 	return (
 		<DocsLayout
 			tree={source.pageTree}
-			{...base}		
-				tabMode="auto"
-				nav={{
-					...base.nav,
-					enabled: true,
-					title: (
-						<>
-							<ShieldPlus
-								className="size-9 stroke-[2.5] text-fd-background"
-								fill="var(--color-fd-primary)"
-							/>
-							<span className="font-bold text-2xl text-fd-primary">Immune</span>
-						</>
-					),
-				}}
-			sidebar={{
-				tabs: {
-					transform(option, node) {
-						const meta = source.getNodeMeta(node);
-						if (!meta || !node.icon) return option;
-
-						return {
-							...option,
-							icon: (
-								<div className="[&_svg]:size-full rounded-lg size-full text-fd-primary max-md:bg-fd-primary/10 max-md:border max-md:p-1.5">
-									{node.icon}
-								</div>
-							),
-						};
-					},
-				},
+			{...base}
+			nav={{
+				...base.nav,
+				enabled: true,
+				title: (
+					<>
+						<ShieldPlus
+							className="size-9 stroke-[2.5] text-fd-background"
+							fill="var(--color-fd-primary)"
+						/>
+						<span className="font-bold text-2xl text-fd-primary">Immune</span>
+					</>
+				),
 			}}
 		>
 			{children}
