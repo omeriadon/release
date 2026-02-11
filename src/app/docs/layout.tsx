@@ -1,18 +1,14 @@
 import { DocsLayout } from "fumadocs-ui/layouts/docs";
 import { baseOptions } from "@/lib/layout.shared";
-import { createElement } from "react";
-import { icons, BookText } from "lucide-react";
+import {  BookText } from "lucide-react";
 import { source } from "@/lib/source";
-
-const reportIcon = createElement(icons["MessageCircle"]);
-const powerIcon = createElement(icons["Power"]);
 
 export default function Layout({ children }: LayoutProps<"/docs">) {
 	const base = baseOptions();
 
 	return (
 		<DocsLayout
-			tree={source.pageTree}
+			tree={source.getPageTree()}
 			{...base}
 			nav={{
 				...base.nav,
