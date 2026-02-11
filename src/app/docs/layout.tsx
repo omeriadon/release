@@ -13,23 +13,7 @@ export default function Layout({ children }: LayoutProps<"/docs">) {
 	return (
 		<DocsLayout
 			tree={source.pageTree}
-			{...base}
-			githubUrl="https://github.com/omeriadon/immune"
-				links={[
-					{
-						type: "icon",
-						text: "Introduction",
-						icon: powerIcon,
-						url: "/docs/introduction",
-					},
-					{
-						type: "icon",
-						text: "Report Issue",
-						icon: reportIcon,
-						url: "https://github.com/omeriadon/immune/issues/new",
-						external: true,
-					},
-				]}
+			{...base}		
 				tabMode="auto"
 				nav={{
 					...base.nav,
