@@ -1,7 +1,7 @@
 import { DocsLayout } from "fumadocs-ui/layouts/docs";
 import { baseOptions } from "@/lib/layout.shared";
 import { createElement } from "react";
-import { icons, ShieldPlus } from "lucide-react";
+import { icons, BookText } from "lucide-react";
 import { source } from "@/lib/source";
 
 const reportIcon = createElement(icons["MessageCircle"]);
@@ -19,11 +19,12 @@ export default function Layout({ children }: LayoutProps<"/docs">) {
 				enabled: true,
 				title: (
 					<>
-						<ShieldPlus
-							className="size-9 stroke-[2.5] text-fd-background"
-							fill="var(--color-fd-primary)"
+						<BookText
+							className="size-9 stroke-[2.5]"
+							// fill="var(--color-fd-primary)"
+							stroke="var(--color-fd-primary)"
 						/>
-						<span className="font-bold text-2xl text-fd-primary">Immune</span>
+						<span className="font-bold text-2xl text-fd-primary">Release</span>
 					</>
 				),
 			}}

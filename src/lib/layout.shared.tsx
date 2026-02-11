@@ -36,7 +36,7 @@ export const linkItems: LinkItemType[] = [
 export function baseOptions(): BaseLayoutProps {
 	return {
 		nav: {
-			title: "Immune",
+			title: "Release",
 		},
 	};
 }

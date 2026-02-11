@@ -108,7 +108,7 @@ export async function generateMetadata(
 	const title = page.data.title ?? "Inidex";
 
 	return {
-		title: `${title} → Immune`,
+		title: `${title} → Release`,
 		description: page.data.description ?? "",
 		icons: {
 			icon: "/favicon.ico",

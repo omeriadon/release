@@ -14,7 +14,7 @@ export function baseOptions(): BaseLayoutProps {
 						className="size-9 stroke-[2.5] text-fd-background"
 						fill="var(--color-fd-primary)"
 					/>
-					<span className="font-bold text-2xl text-fd-primary">Immune</span>
+					<span className="font-bold text-2xl text-fd-primary">Release</span>
 				</>
 			),
 		},
