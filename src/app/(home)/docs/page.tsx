@@ -65,18 +65,8 @@ export default function DocsPage() {
 }
 
 function Icon({ href, children }: { href: string; children: React.ReactNode }) {
-	const lastSlug = href.split("/").filter(Boolean).pop();
-	const colorVar = `--${lastSlug}-color`;
-	const color = `var(${colorVar})`;
 	return (
-		<div
-			className="mb-2 size-8 [&_svg]:size-full rounded-lg text-tab-color bg-(--tab-color)/10 border p-1"
-			style={
-				{
-					"--tab-color": color,
-				} as object
-			}
-		>
+		<div className="mb-2 size-8 [&_svg]:size-full rounded-lg text-fd-primary bg-fd-primary/10 border p-1">
 			{children}
 		</div>
 	);
@@ -88,15 +78,11 @@ interface ItemProps extends LinkProps {
 }
 
 function Item({ href, children, ...rest }: ItemProps) {
-	const lastSlug = href.split("/").filter(Boolean).pop();
-	const color = `var(--${lastSlug}-color, var(--color-fd-foreground))`;
-
 	return (
 		<Link
 			href={href}
 			{...rest}
-			className={`bg-fd-card rounded-3xl border p-4 shadow-lg hover:bg-fd-popover transition-all`}
-			style={{ color }}
+			className="bg-fd-card rounded-3xl border p-4 shadow-lg hover:bg-fd-popover transition-all"
 		>
 			{children}
 		</Link>

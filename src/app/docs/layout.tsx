@@ -3,7 +3,6 @@ import { baseOptions } from "@/lib/layout.shared";
 import { createElement } from "react";
 import { icons, ShieldPlus } from "lucide-react";
 import { source } from "@/lib/source";
-import { DynamicThemeWrapper } from "./layout.client"; // Import the wrapper
 
 const reportIcon = createElement(icons["MessageCircle"]);
 const powerIcon = createElement(icons["Power"]);
@@ -12,11 +11,10 @@ export default function Layout({ children }: LayoutProps<"/docs">) {
 	const base = baseOptions();
 
 	return (
-		<DynamicThemeWrapper>
-			<DocsLayout
-				tree={source.pageTree}
-				{...base}
-				githubUrl="https://github.com/omeriadon/immune"
+		<DocsLayout
+			tree={source.pageTree}
+			{...base}
+			githubUrl="https://github.com/omeriadon/immune"
 				links={[
 					{
 						type: "icon",
@@ -46,37 +44,25 @@ export default function Layout({ children }: LayoutProps<"/docs">) {
 						</>
 					),
 				}}
-				sidebar={{
-					tabs: {
-						transform(option, node) {
-							const meta = source.getNodeMeta(node);
-							if (!meta || !node.icon) return option;
+			sidebar={{
+				tabs: {
+					transform(option, node) {
+						const meta = source.getNodeMeta(node);
+						if (!meta || !node.icon) return option;
 
-							const firstSlug = meta.path.split("/")[0];
-
-							const color = `var(--${firstSlug}-color, var(--color-fd-foreground))`;
-
-							return {
-								...option,
-								icon: (
-									<div
-										className="[&_svg]:size-full rounded-lg size-full text-(--tab-color) max-md:bg-(--tab-color)/10 max-md:border max-md:p-1.5"
-										style={
-											{
-												"--tab-color": color,
-											} as object
-										}
-									>
-										{node.icon}
-									</div>
-								),
-							};
-						},
+						return {
+							...option,
+							icon: (
+								<div className="[&_svg]:size-full rounded-lg size-full text-fd-primary max-md:bg-fd-primary/10 max-md:border max-md:p-1.5">
+									{node.icon}
+								</div>
+							),
+						};
 					},
-				}}
-			>
-				{children}
-			</DocsLayout>
-		</DynamicThemeWrapper>
+				},
+			}}
+		>
+			{children}
+		</DocsLayout>
 	);
 }
