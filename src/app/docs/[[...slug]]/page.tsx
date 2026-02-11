@@ -1,14 +1,11 @@
 import { source } from "@/lib/source";
-import {
-	DocsBody,
-	DocsDescription,
-	DocsPage,
-	DocsTitle,
-} from "fumadocs-ui/page";
+import { DocsBody, DocsPage, DocsTitle } from "fumadocs-ui/page";
 import { notFound } from "next/navigation";
 import { getMDXComponents } from "@/mdx-components";
 import type { Metadata } from "next";
 import { createRelativeLink } from "fumadocs-ui/mdx";
+import { icons } from "lucide-react";
+import { createElement } from "react";
 
 export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
 	const params = await props.params;
@@ -16,6 +13,15 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
 	if (!page) notFound();
 
 	const MDX = page.data.body;
+
+
+	const IconElement =
+		page.data.icon && page.data.icon in icons
+			? createElement(icons[page.data.icon as keyof typeof icons], {
+					className: "h-8 w-8 mr-2 text-fd-primary",
+				})
+			: null;
+
 
 	return (
 		<DocsPage
@@ -25,8 +31,10 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
 				style: "clerk",
 			}}
 		>
-			<DocsTitle className="text-fd-primary">{page.data.title}</DocsTitle>
-			<DocsDescription>{page.data.description}</DocsDescription>
+			<span className="flex items-center gap-2 mb-12">
+				{IconElement}
+				<DocsTitle className="text-fd-primary">{page.data.title}</DocsTitle>
+			</span>
 			<DocsBody>
 				<MDX
 					components={getMDXComponents({
