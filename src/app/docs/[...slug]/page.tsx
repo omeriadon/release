@@ -1,7 +1,6 @@
 export const dynamic = "force-dynamic";
 import { source } from "@/lib/source";
 import { getLLMText } from "@/lib/get-llm-text";
-import { LLMCopyButton, ViewOptions } from "@/components/page-actions";
 import {
 	DocsBody,
 	DocsDescription,
@@ -12,26 +11,8 @@ import { notFound } from "next/navigation";
 import { getMDXComponents } from "@/mdx-components";
 import type { Metadata } from "next";
 import { createRelativeLink } from "fumadocs-ui/mdx";
-import { getGithubLastEdit } from "fumadocs-core/content/github";
-import { CalendarClock, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
-export async function getLastModifiedTime(path: string): Promise<string> {
-	if (process.env.NODE_ENV === "development") {
-		return "Updated: Dev placeholder"; // <- must return
-	}
-
-	const time = await getGithubLastEdit({
-		owner: "omeriadon",
-		repo: "immune",
-		path: `content/docs/${path}`,
-		token: process.env.GIT_TOKEN,
-	});
-
-	if (!time) return "Unknown";
-	return time instanceof Date
-		? "Updated: " + time.toLocaleDateString("en-GB", { dateStyle: "long" })
-		: String("Updated: " + time);
-}
 
 function getFolderName(slugSegment: string | number): string {
 	const tree = source.pageTree;
@@ -130,22 +111,6 @@ export default async function Page(props: PageProps<"/docs/[...slug]">) {
 		>
 			<DocsTitle className="text-fd-primary">{page.data.title}</DocsTitle>
 
-			<div className="flex gap-3 items-center">
-				<div className="flex gap-3 items-center">
-					<LLMCopyButton markdownUrl={`${page.url}.mdx`} />
-
-					<ViewOptions
-						markdownUrl={`${page.url}.mdx`}
-						githubUrl={`https://github.com/omeriadon/immune/tree/main/content/docs/${page.path}`}
-						markdownContent={markdownContent}
-					/>
-				</div>
-
-				<div className="inline-flex items-center justify-center gap-2 rounded-md border px-1.5 py-1 text-xs font-medium text-fd-secondary-foreground">
-					<CalendarClock className="size-3.5 text-fd-muted-foreground" />
-					<p>{await getLastModifiedTime(page.path)}</p>
-				</div>
-			</div>
 
 			<DocsDescription>{page.data.description}</DocsDescription>
 
