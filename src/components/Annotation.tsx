@@ -6,19 +6,22 @@ export const Annotation = (
 	<span
 		{...props}
 		style={{
-			backgroundColor: "rgba(16, 179, 171, 0.6)",
+			border: "1px solid rgba(16, 179, 171, 0.6)",
 			padding: "0.1rem 0.2rem",
 			borderRadius: "5px",
 			position: "relative",
 			cursor: "help",
+			transition: "background-color 0.2s",
 		}}
 		onMouseEnter={(e) => {
 			const tooltip = e.currentTarget.querySelector(".tooltip") as HTMLElement;
 			if (tooltip) tooltip.style.opacity = "1";
+			e.currentTarget.style.backgroundColor = "rgba(16, 179, 171, 0.6)";
 		}}
 		onMouseLeave={(e) => {
 			const tooltip = e.currentTarget.querySelector(".tooltip") as HTMLElement;
 			if (tooltip) tooltip.style.opacity = "0";
+			e.currentTarget.style.backgroundColor = "transparent";
 		}}
 	>
 		{props.children}
