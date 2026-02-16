@@ -1,7 +1,7 @@
 import defaultMdxComponents from "fumadocs-ui/mdx";
 import type { MDXComponents } from "mdx/types";
 import { Annotation } from "./components/Annotation";
-import { Map } from "./components/Map";
+import { MurgonMap } from "./components/Maps";
 
 const Highlight = (props: React.PropsWithChildren<{ className?: string }>) => (
 	<span
@@ -24,7 +24,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
 		h4: (props) => <h4 {...props} className="text-fd-primary" />,
 		Highlight,
 		Annotation,
-		Map,
+		MurgonMap,
 		...components,
 	};
 }
