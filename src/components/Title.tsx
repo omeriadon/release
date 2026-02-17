@@ -57,7 +57,7 @@ export const Title = (props: {
 				backdropFilter: "blur(20px)",
 				padding: "0.3rem 0.75rem 0.2rem 0.75rem",
 				borderRadius: "10px",
-				fontSize: "0.875rem",
+				fontSize: "1rem",
 				whiteSpace: "pre-wrap",
 				width: "400px",
 				opacity: 0,

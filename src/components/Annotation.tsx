@@ -18,7 +18,7 @@ export const Annotation = (
 			if (tooltip) {
 				const rect = e.currentTarget.getBoundingClientRect();
 				const isTopHalf = rect.top < window.innerHeight / 2;
-				
+
 				if (isTopHalf) {
 					tooltip.style.bottom = "auto";
 					tooltip.style.top = "calc(100% + 8px)";
@@ -26,7 +26,7 @@ export const Annotation = (
 					tooltip.style.top = "auto";
 					tooltip.style.bottom = "calc(100% + 8px)";
 				}
-				
+
 				tooltip.style.opacity = "1";
 			}
 			e.currentTarget.style.border = "1.7px solid transparent";
@@ -41,13 +41,12 @@ export const Annotation = (
 	>
 		{props.children}
 		<span
-			className="tooltip"
+			className="tooltip text-fd-foreground bg-fd-background/20"
 			style={{
 				position: "absolute",
 				bottom: "calc(100% + 8px)",
 				left: "50%",
 				transform: "translateX(-50%)",
-				backgroundColor: "rgba(0, 0, 0, 0.15)",
 				backdropFilter: "blur(20px)",
 				padding: "0.3rem 0.75rem 0.2rem 0.75rem",
 				borderRadius: "10px",
