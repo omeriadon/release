@@ -15,8 +15,8 @@ export const Annotation = (
 		}}
 		onMouseEnter={(e) => {
 			const tooltip = e.currentTarget.querySelector(".tooltip") as HTMLElement;
-            if (tooltip) tooltip.style.opacity = "1";
-            e.currentTarget.style.border = "1.7px solid transparent";
+			if (tooltip) tooltip.style.opacity = "1";
+			e.currentTarget.style.border = "1.7px solid transparent";
 			e.currentTarget.style.backgroundColor = "rgba(16, 179, 171, 0.6)";
 		}}
 		onMouseLeave={(e) => {
@@ -40,10 +40,13 @@ export const Annotation = (
 				padding: "0.3rem 0.75rem 0.2rem 0.75rem",
 				borderRadius: "10px",
 				fontSize: "0.875rem",
-				whiteSpace: "nowrap",
+				whiteSpace: "pre-wrap",
+				maxWidth: "min(300px, 90vw)",
+				width: "max-content",
 				opacity: 0,
 				pointerEvents: "none",
 				transition: "opacity 0.2s",
+				zIndex: 1000,
 			}}
 		>
 			{props.annotation}
