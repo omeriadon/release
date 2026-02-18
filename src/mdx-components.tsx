@@ -4,6 +4,7 @@ import { ImageZoom } from "fumadocs-ui/components/image-zoom";
 import { Annotation } from "./components/Annotation";
 import { MurgonMap } from "./components/Maps";
 import { Title } from "./components/Title";
+import { Mermaid } from "./components/mermaid";
 
 const Highlight = (props: React.PropsWithChildren<{ className?: string }>) => (
 	<span
@@ -27,6 +28,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
 		Highlight,
 		Annotation,
 		MurgonMap,
+		Mermaid,
 		Title,
 		img: (props) => <ImageZoom {...(props as any)} />,
 		...components,
