@@ -52,7 +52,11 @@ export const Annotation = (
 			const tooltip = e.currentTarget.querySelector(".tooltip") as HTMLElement;
 			if (tooltip) {
 				tooltip.style.opacity = "0";
-				tooltip.style.transform = "translateX(-65%)";
+				const onEnd = () => {
+					tooltip.style.transform = "translateX(-65%)";
+					tooltip.removeEventListener("transitionend", onEnd);
+				};
+				tooltip.addEventListener("transitionend", onEnd);
 			}
 			e.currentTarget.style.backgroundColor = "transparent";
 			e.currentTarget.style.border = "1.7px solid rgba(16, 179, 171, 0.6)";
