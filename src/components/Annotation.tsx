@@ -16,7 +16,11 @@ export const Annotation = (
 			position: "relative",
 			cursor: "help",
 			transition: "background-color 0.2s",
-			...(props.author && { marginTop: "0.75rem", paddingInline: "0.5rem", display: "inline-block" }),
+			...(props.author && {
+				marginTop: "0.75rem",
+				paddingInline: "0.5rem",
+				display: "inline-block",
+			}),
 		}}
 		onMouseEnter={(e) => {
 			const tooltip = e.currentTarget.querySelector(".tooltip") as HTMLElement;
@@ -32,6 +36,12 @@ export const Annotation = (
 					tooltip.style.bottom = "calc(100% + 8px)";
 				}
 
+				const isLeftHalf = rect.right < window.innerWidth / 2;
+				tooltip.style.left = "20%";
+				tooltip.style.transform = isLeftHalf
+					? "translateX(0%)"
+					: "translateX(-65%)";
+
 				tooltip.style.opacity = "1";
 			}
 			e.currentTarget.style.border = "1.7px solid transparent";
@@ -40,7 +50,10 @@ export const Annotation = (
 		}}
 		onMouseLeave={(e) => {
 			const tooltip = e.currentTarget.querySelector(".tooltip") as HTMLElement;
-			if (tooltip) tooltip.style.opacity = "0";
+			if (tooltip) {
+				tooltip.style.opacity = "0";
+				tooltip.style.transform = "translateX(-65%)";
+			}
 			e.currentTarget.style.backgroundColor = "transparent";
 			e.currentTarget.style.border = "1.7px solid rgba(16, 179, 171, 0.6)";
 			if (props.author) e.currentTarget.style.color = "";
@@ -55,12 +68,13 @@ export const Annotation = (
 				position: "absolute",
 				bottom: "calc(100% + 8px)",
 				left: "20%",
-				transform: "translateX(-60%)",
+				transform: "translateX(-65%)",
 				backdropFilter: "blur(15px)",
 				padding: "0.3rem 0.75rem 0.2rem 0.75rem",
 				borderRadius: "10px",
 				whiteSpace: "pre-wrap",
-				minWidth: "200px",
+				minWidth: "50px",
+				width: "max-content",
 				maxWidth: "400px",
 				opacity: 0,
 				pointerEvents: "none",
