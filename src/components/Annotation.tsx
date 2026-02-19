@@ -41,13 +41,13 @@ export const Annotation = (
 	>
 		{props.children}
 		<span
-			className="tooltip text-fd-foreground bg-fd-background/20"
+			className="tooltip text-fd-foreground bg-fd-muted/40"
 			style={{
 				position: "absolute",
 				bottom: "calc(100% + 8px)",
 				left: "50%",
 				transform: "translateX(-50%)",
-				backdropFilter: "blur(20px)",
+				backdropFilter: "blur(15px)",
 				padding: "0.3rem 0.75rem 0.2rem 0.75rem",
 				borderRadius: "10px",
 				whiteSpace: "pre-wrap",

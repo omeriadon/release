@@ -4,7 +4,7 @@ import { ImageZoom } from "fumadocs-ui/components/image-zoom";
 import { Annotation } from "./components/Annotation";
 import { MurgonMap } from "./components/Maps";
 import { Title } from "./components/Title";
-import { Mermaid } from "./components/mermaid";
+import { Mermaid } from "./components/Mermaid";
 
 const Highlight = (props: React.PropsWithChildren<{ className?: string }>) => (
 	<span
