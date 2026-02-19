@@ -1,17 +1,22 @@
 "use client";
 
 export const Annotation = (
-	props: React.PropsWithChildren<{ className?: string; annotation: string }>,
+	props: React.PropsWithChildren<{
+		className?: string;
+		annotation: string;
+		author?: boolean;
+	}>,
 ) => (
 	<span
 		{...props}
 		style={{
 			border: "1.7px solid rgba(16, 179, 171, 0.6)",
 			padding: "0.1rem 0.2rem",
-			borderRadius: "5px",
+			borderRadius: props.author ? "10px" : "5px",
 			position: "relative",
 			cursor: "help",
 			transition: "background-color 0.2s",
+			...(props.author && { marginTop: "0.75rem", paddingInline: "0.5rem", display: "inline-block" }),
 		}}
 		onMouseEnter={(e) => {
 			const tooltip = e.currentTarget.querySelector(".tooltip") as HTMLElement;
@@ -31,15 +36,19 @@ export const Annotation = (
 			}
 			e.currentTarget.style.border = "1.7px solid transparent";
 			e.currentTarget.style.backgroundColor = "rgba(16, 179, 171, 0.6)";
+			if (props.author) e.currentTarget.style.color = "white";
 		}}
 		onMouseLeave={(e) => {
 			const tooltip = e.currentTarget.querySelector(".tooltip") as HTMLElement;
 			if (tooltip) tooltip.style.opacity = "0";
 			e.currentTarget.style.backgroundColor = "transparent";
 			e.currentTarget.style.border = "1.7px solid rgba(16, 179, 171, 0.6)";
+			if (props.author) e.currentTarget.style.color = "";
 		}}
 	>
-		{props.children}
+		<span className={props.author ? "text-fd-foreground" : undefined}>
+			{props.children}
+		</span>
 		<span
 			className="tooltip text-fd-foreground bg-fd-muted/40"
 			style={{
