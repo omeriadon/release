@@ -2,6 +2,7 @@
 
 import { use, useEffect, useId, useState } from "react";
 import { useTheme } from "next-themes";
+import { PUBLIC_DIR_MIDDLEWARE_CONFLICT } from "next/dist/lib/constants";
 
 export function Mermaid({ chart }: { chart: string }) {
 	const [mounted, setMounted] = useState(false);
