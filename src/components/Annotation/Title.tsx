@@ -32,6 +32,12 @@ export const Title = (props: {
 					tooltip.style.bottom = "calc(100% + 8px)";
 				}
 
+				const isLeftHalf = rect.right < window.innerWidth / 2;
+				tooltip.style.left = "20%";
+				tooltip.style.transform = isLeftHalf
+					? "translateX(0%)"
+					: "translateX(-65%)";
+
 				tooltip.style.opacity = "1";
 			}
 			e.currentTarget.style.border = "1.7px solid transparent";
@@ -40,7 +46,14 @@ export const Title = (props: {
 		}}
 		onMouseLeave={(e) => {
 			const tooltip = e.currentTarget.querySelector(".tooltip") as HTMLElement;
-			if (tooltip) tooltip.style.opacity = "0";
+			if (tooltip) {
+				tooltip.style.opacity = "0";
+				const onEnd = () => {
+					tooltip.style.transform = "translateX(-65%)";
+					tooltip.removeEventListener("transitionend", onEnd);
+				};
+				tooltip.addEventListener("transitionend", onEnd);
+			}
 			e.currentTarget.style.backgroundColor = "transparent";
 			e.currentTarget.style.border = "1.7px solid rgba(16, 179, 171, 0.6)";
 			e.currentTarget.style.color = "";
@@ -48,13 +61,13 @@ export const Title = (props: {
 	>
 		{props.title}
 		<span
-			className="tooltip text-fd-foreground bg-fd-background/20"
+			className="tooltip text-fd-foreground bg-fd-muted/50"
 			style={{
 				position: "absolute",
 				bottom: "calc(100% + 8px)",
-				left: "50%",
-				transform: "translateX(-50%)",
-				backdropFilter: "blur(20px)",
+				left: "20%",
+				transform: "translateX(-65%)",
+				backdropFilter: "blur(15px)",
 				padding: "0.3rem 0.75rem 0.2rem 0.75rem",
 				borderRadius: "10px",
 				fontSize: "1rem",

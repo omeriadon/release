@@ -1,18 +1,16 @@
 import { HomeLayout } from "fumadocs-ui/layouts/home";
 import { BaseLayoutProps } from "fumadocs-ui/layouts/links";
-import { createElement } from "react";
-import { icons, ShieldPlus } from "lucide-react";
+import { BookText } from "lucide-react";
 
-const bookIcon = createElement(icons["Book"]);
 
 export function baseOptions(): BaseLayoutProps {
 	return {
 		nav: {
 			title: (
 				<>
-					<ShieldPlus
-						className="size-9 stroke-[2.5] text-fd-background"
-						fill="var(--color-fd-primary)"
+					<BookText
+						className="size-8 stroke-[2.4]"
+						stroke="var(--color-fd-primary)"
 					/>
 					<span className="font-bold text-2xl text-fd-primary">Release</span>
 				</>
@@ -27,8 +25,7 @@ export default function Layout({ children }: LayoutProps<"/">) {
 			{...baseOptions()}
 			links={[
 				{
-					text: "Docs",
-					icon: bookIcon,
+					text: "Our submission →",
 					url: "/docs",
 				},
 			]}
