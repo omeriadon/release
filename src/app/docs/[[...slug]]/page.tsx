@@ -18,7 +18,7 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
 	const IconElement =
 		page.data.icon && page.data.icon in icons
 			? createElement(icons[page.data.icon as keyof typeof icons], {
-					className: "h-8 w-8 mr-2 text-fd-primary",
+					className: "h-15 w-15 mr-2 text-fd-primary",
 				})
 			: null;
 
@@ -31,9 +31,9 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
 				style: "clerk",
 			}}
 		>
-			<span className="flex items-center gap-2 mb-12">
+			<span className="flex items-center gap-4 mb-12">
 				{IconElement}
-				<DocsTitle className="text-fd-primary">{page.data.title}</DocsTitle>
+				<DocsTitle className="text-fd-primary text-5xl">{page.data.title}</DocsTitle>
 			</span>
 			<DocsBody>
 				<MDX

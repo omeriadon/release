@@ -1,11 +1,13 @@
 {
 	"pages": [
 		"index",
+		"---",
 		"summary",
 		"character-overview",
 		"context",
 		"the-drive",
 		"---",
+		"ideas-mindmap",
 		"ideas-themes",
 		"narrative-techniques",
 		"---",
