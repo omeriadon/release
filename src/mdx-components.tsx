@@ -30,7 +30,9 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
 		MurgonMap,
 		Mermaid,
 		Title,
-		img: (props) => <ImageZoom {...(props as any)} />,
+		img: (props) => (
+			<ImageZoom {...(props as any)} className="rounded-[10px]" />
+		),
 		...components,
 	};
 }
