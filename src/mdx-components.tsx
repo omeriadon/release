@@ -1,10 +1,10 @@
 import defaultMdxComponents from "fumadocs-ui/mdx";
 import type { MDXComponents } from "mdx/types";
 import { ImageZoom } from "fumadocs-ui/components/image-zoom";
-import { Annotation } from "./components/Annotation";
-import { MurgonMap } from "./components/Maps";
-import { Title } from "./components/Title";
-import { Mermaid } from "./components/Mermaid";
+import { Annotation } from "./components/Annotation/Annotation";
+import { MurgonMap } from "./components/Map/Maps";
+import { Title } from "./components/Annotation/Title";
+import { Mermaid } from "./components/Annotation/Mermaid";
 
 const Highlight = (props: React.PropsWithChildren<{ className?: string }>) => (
 	<span
