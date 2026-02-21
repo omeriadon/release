@@ -14,6 +14,10 @@
   font-style: normal;
 }
 
+.new-york {
+  font-family: 'NewYork', serif;
+}
+
 .prose :where(img):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
     margin-top: 0;
     margin-bottom: 0;
