@@ -5,16 +5,16 @@ const RELEASES = [
 	{
 		title: "Release from Tension",
 		description:
-			"The work serves as an emotional catharsis — an unburdening of grief, guilt, and the weight of a life half-lived. Watson channels sorrow into prose, allowing the reader to exhale alongside Danny as he scatters the last evidence of his cousin into the night.",
+			"Esse qui id minim quis voluptate id cillum. Duis esse deserunt ipsum sit ex. Enim deserunt eu irure ipsum nostrud laborum est ullamco voluptate. Aliqua tempor ea anim ullamco commodo occaecat do. Non elit magna esse eiusmod sunt. Labore adipisicing mollit incididunt magna labore ullamco enim proident. Deserunt cupidatat esse officia enim amet adipisicing esse mollit quis in.",
 	},
 	{
 		title: "Release from Prison",
-		description: `Bull's literal release from prison frames the entire journey home. Yet freedom proves hollow — the prisons of addiction, poverty, and systemic racism followed him beyond the bars, leaving him with nothing but a beige paper bag stamped "PERSONAL PROPERTY."`,
+		description: `Tempor cupidatat velit commodo labore veniam pariatur fugiat. Pariatur reprehenderit velit ipsum qui culpa enim ad nisi magna. Duis sint magna ea nisi aliqua aute esse veniam tempor nisi est magna velit. Dolor aute deserunt id enim cillum duis Lorem proident anim ipsum nulla aliquip. Anim elit deserunt pariatur minim officia enim incididunt cillum. Irure consequat duis ea anim occaecat do nostrud eiusmod nisi labore. Non aliquip sit cillum deserunt adipisicing adipisicing sunt.`,
 	},
 	{
 		title: "Release from Life",
 		description:
-			"The final, most devastating meaning: Bull's release from life itself. His ashes scattered on ancestral Wakka Wakka country represent the ultimate homecoming — a return to the land that the living world systematically denied him.",
+			"Officia officia ullamco nulla officia adipisicing deserunt labore laborum adipisicing. Adipisicing qui mollit officia consectetur laboris amet fugiat laborum ea duis incididunt. Id do consequat nostrud mollit qui dolor ut Lorem in quis sit nostrud tempor do. Cupidatat amet officia ullamco. Nisi labore fugiat reprehenderit et laborum ullamco dolor pariatur aliquip aliquip voluptate velit.",
 	},
 ];
 
