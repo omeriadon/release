@@ -34,9 +34,9 @@ const ReleaseCard = ({
 		onMouseLeave={onLeave}
 		style={{
 			flex: "1 1 220px",
-			background: hovered ? "var(--color-fd-accent)" : "var(--color-fd-card)",
-			border: `1px solid ${hovered ? "var(--color-fd-ring)" : "var(--color-fd-border)"}`,
-			borderRadius: "12px",
+			background: hovered ? "var(--color-fd-popover)" : "var(--color-fd-card)",
+			border: `1px solid ${hovered ? "var(--color-fd-accent)" : "var(--color-fd-border)"}`,
+			borderRadius: "20px",
 			padding: "1.25rem",
 			transition: "background 0.18s, border-color 0.18s",
 			cursor: "default",
@@ -67,8 +67,6 @@ const ReleaseCard = ({
 
 export const Title = (props: {
 	className?: string;
-	title: string;
-	annotation: string;
 }) => {
 	const [open, setOpen] = useState(false);
 	const [titleHovered, setTitleHovered] = useState(false);
@@ -112,7 +110,7 @@ export const Title = (props: {
 					userSelect: "none",
 				}}
 			>
-				{props.title}
+				Release
 			</span>
 
 			{/* Backdrop */}
@@ -140,7 +138,7 @@ export const Title = (props: {
 					style={{
 						background: "var(--color-fd-popover)",
 						border: "1px solid var(--color-fd-border)",
-						borderRadius: "16px",
+						borderRadius: "40px",
 						padding: "1.75rem",
 						maxWidth: "900px",
 						width: "100%",
@@ -157,7 +155,7 @@ export const Title = (props: {
 						style={{
 							display: "flex",
 							justifyContent: "space-between",
-							alignItems: "center",
+							alignItems: "flex-start",
 							marginBottom: "1.25rem",
 						}}
 					>
@@ -171,7 +169,7 @@ export const Title = (props: {
 									fontFamily: "NewYork",
 								}}
 							>
-								Release
+								"Release"
 							</h2>
 							<p
 								style={{
@@ -180,7 +178,7 @@ export const Title = (props: {
 									margin: "0.25rem 0 0 0",
 								}}
 							>
-								Polysemic — multiple meanings distinguished by context
+								Polysemic - multiple meanings distinguished by context
 							</p>
 						</div>
 						<button
@@ -188,10 +186,13 @@ export const Title = (props: {
 							onMouseEnter={(e) => {
 								(e.currentTarget as HTMLButtonElement).style.color =
 									"var(--color-fd-foreground)";
+								(e.currentTarget as HTMLButtonElement).style.scale = "1.1";
 							}}
 							onMouseLeave={(e) => {
 								(e.currentTarget as HTMLButtonElement).style.color =
 									"var(--color-fd-muted-foreground)";
+								(e.currentTarget as HTMLButtonElement).style.scale = "1";
+
 							}}
 							style={{
 								background: "transparent",
@@ -201,8 +202,8 @@ export const Title = (props: {
 								fontSize: "1.1rem",
 								padding: "0.2rem 0.4rem",
 								lineHeight: 1,
-								borderRadius: "6px",
-								transition: "color 0.15s",
+								borderRadius: "10px",
+								transition: "all 0.15s",
 							}}
 						>
 							✕
