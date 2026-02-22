@@ -99,7 +99,11 @@ export function AudioPlayer() {
 				}}
 			>
 				{isPlaying ? (
-					<Pause size={12} fill="white" stroke="white" />
+					<Pause
+						size={12}
+						fill="white"
+						stroke="white"
+					/>
 				) : (
 					<Play
 						size={12}

@@ -2,7 +2,25 @@
 
 import { use, useEffect, useId, useState } from "react";
 import { useTheme } from "next-themes";
-import { PUBLIC_DIR_MIDDLEWARE_CONFLICT } from "next/dist/lib/constants";
+
+const DARK_COLORS: Record<string, string> = {
+	"fill:#232323": "fill:#f4f4f5",
+	"stroke:#313131": "stroke:#d4d4d8",
+	"color:#fff": "color:#18181b",
+	"fill:#1c2928": "fill:#ccefec",
+	"stroke:#1e726e": "stroke:#1e726e",
+	"fill:#2D3136": "fill:#dde6f5",
+	"stroke:#89AFDF": "stroke:#4a7fc1",
+	"stroke:#3b3b3b": "stroke:#d4d4d8",
+};
+
+function applyLightColors(chart: string): string {
+	let result = chart;
+	for (const [dark, light] of Object.entries(DARK_COLORS)) {
+		result = result.replaceAll(dark, light);
+	}
+	return result;
+}
 
 export function Mermaid({ chart }: { chart: string }) {
 	const [mounted, setMounted] = useState(false);
@@ -32,6 +50,9 @@ function cachePromise<T>(
 function MermaidContent({ chart }: { chart: string }) {
 	const id = useId();
 	const { resolvedTheme } = useTheme();
+	const isDark = resolvedTheme === "dark";
+	const processedChart = isDark ? chart : applyLightColors(chart);
+
 	const { default: mermaid } = use(
 		cachePromise("mermaid", () => import("mermaid")),
 	);
@@ -40,12 +61,12 @@ function MermaidContent({ chart }: { chart: string }) {
 		startOnLoad: false,
 		securityLevel: "loose",
 		fontFamily: "inherit",
-		theme: resolvedTheme === "dark" ? "dark" : "default",
+		theme: isDark ? "dark" : "default",
 	});
 
 	const { svg, bindFunctions } = use(
-		cachePromise(`${chart}-${resolvedTheme}`, () => {
-			return mermaid.render(id, chart.replaceAll("\\n", "\n"));
+		cachePromise(`${processedChart}-${resolvedTheme}`, () => {
+			return mermaid.render(id, processedChart.replaceAll("\\n", "\n"));
 		}),
 	);
 
