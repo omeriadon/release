@@ -35,7 +35,7 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
 				{IconElement}
 				<DocsTitle className="text-fd-primary text-3xl">{page.data.title}</DocsTitle>
 			</span>
-			<DocsBody>
+			<DocsBody className="mb-40">
 				<MDX
 					components={getMDXComponents({
 						a: createRelativeLink(source, page),
