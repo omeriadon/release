@@ -1,5 +1,5 @@
 import { HomeLayout } from "fumadocs-ui/layouts/home";
-import { BaseLayoutProps } from "fumadocs-ui/layouts/links";
+import { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
 import { BookText } from "lucide-react";
 
 
