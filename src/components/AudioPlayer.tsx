@@ -47,18 +47,36 @@ export function AudioPlayer() {
 				backdropFilter: "blur(8px)",
 			}}
 		>
-			{isPlaying ? (
-				<Volume2
-					size={20}
-					style={{ color: "var(--color-fd-primary)", flexShrink: 0 }}
-				/>
-			) : (
-				<VolumeOff
-					size={20}
-					style={{ color: "var(--color-fd-primary)", flexShrink: 0 }}
-				/>
-            )}
-            
+			<AnimatePresence mode="wait">
+				{isPlaying ? (
+					<motion.div
+						key="volume-on"
+						initial={{ opacity: 0, scale: 0.8, filter: "blur(4px)" }}
+						animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+						exit={{ opacity: 0, scale: 0.8, filter: "blur(4px)" }}
+						transition={{ duration: 0.2 }}
+					>
+						<Volume2
+							size={20}
+							style={{ color: "var(--color-fd-primary)", flexShrink: 0 }}
+						/>
+					</motion.div>
+				) : (
+					<motion.div
+						key="volume-off"
+						initial={{ opacity: 0, scale: 0.8, filter: "blur(4px)" }}
+						animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+						exit={{ opacity: 0, scale: 0.8, filter: "blur(4px)" }}
+						transition={{ duration: 0.2 }}
+					>
+						<VolumeOff
+							size={20}
+							style={{ color: "var(--color-fd-primary)", flexShrink: 0 }}
+						/>
+					</motion.div>
+				)}
+			</AnimatePresence>
+
 			<button
 				onClick={togglePlayPause}
 				disabled={!isReady && !isLoading}
