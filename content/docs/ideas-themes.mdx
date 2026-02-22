@@ -3,45 +3,54 @@ title: Ideas & Themes
 icon: Lightbulb
 ---
 
-<Tabs defaultValue="section1">
+<Tabs defaultValue="racism">
   <TabsList>
-    <TabsTrigger value="section1">Section One</TabsTrigger>
-    <TabsTrigger value="section2">Section Two</TabsTrigger>
-    <TabsTrigger value="section3">Section Three</TabsTrigger>
+    <TabsTrigger value="racism"><Icon name="Rainbow" size={14} /> Racism</TabsTrigger>
+    <TabsTrigger value="grief"><Icon name="HeartCrack" size={14} /> Grief & Loss</TabsTrigger>
+    <TabsTrigger value="dehumanisation"><Icon name="UserX" size={14} /> Dehumanisation</TabsTrigger>
+    <TabsTrigger value="addiction"><Icon name="Pill" size={14} /> Addiction</TabsTrigger>
   </TabsList>
 
-  <TabsContent value="section1">
-    <h3 style={{ marginTop: 0, color: 'var(--color-fd-foreground)' }}>Section One</h3>
+  <TabsContent value="racism">
     <Accordions type="single">
-      <Accordion title="Placeholder quote for Section One">
-      - Placeholder paragraph for Section One, Quote 1.
+      <Accordion value="racism-1" title={<span className="new-york" style={{ color: 'var(--color-fd-muted-foreground)', fontStyle: 'italic' }}>"Placeholder quote for Racism."</span>}>
+        Placeholder paragraph for Racism, Quote 1.
       </Accordion>
-      <Accordion title="Another placeholder quote for Section One">
-      - Placeholder paragraph for Section One, Quote 2.
+      <Accordion value="racism-2" title={<span className="new-york" style={{ color: 'var(--color-fd-muted-foreground)', fontStyle: 'italic' }}>"Another placeholder quote for Racism."</span>}>
+        Placeholder paragraph for Racism, Quote 2.
       </Accordion>
     </Accordions>
   </TabsContent>
 
-  <TabsContent value="section2">
-    <h3 style={{ marginTop: 0, color: 'var(--color-fd-foreground)' }}>Section Two</h3>
+  <TabsContent value="grief">
     <Accordions type="single">
-      <Accordion title="Placeholder quote for Section Two">
-      - Placeholder paragraph for Section Two, Quote 1.
+      <Accordion value="grief-1" title={<span className="new-york" style={{ color: 'var(--color-fd-muted-foreground)', fontStyle: 'italic' }}>"Placeholder quote for Grief & Loss."</span>}>
+        Placeholder paragraph for Grief & Loss, Quote 1.
       </Accordion>
-      <Accordion title="Another placeholder quote for Section Two">
-      - Placeholder paragraph for Section Two, Quote 2.
+      <Accordion value="grief-2" title={<span className="new-york" style={{ color: 'var(--color-fd-muted-foreground)', fontStyle: 'italic' }}>"Another placeholder quote for Grief & Loss."</span>}>
+        Placeholder paragraph for Grief & Loss, Quote 2.
       </Accordion>
     </Accordions>
   </TabsContent>
 
-  <TabsContent value="section3">
-    <h3 style={{ marginTop: 0, color: 'var(--color-fd-foreground)' }}>Section Three</h3>
+  <TabsContent value="dehumanisation">
     <Accordions type="single">
-      <Accordion title="Placeholder quote for Section Three">
-      - Placeholder paragraph for Section Three, Quote 1.
+      <Accordion value="dehumanisation-1" title={<span className="new-york" style={{ color: 'var(--color-fd-muted-foreground)', fontStyle: 'italic' }}>"Placeholder quote for Dehumanisation."</span>}>
+        Placeholder paragraph for Dehumanisation, Quote 1.
       </Accordion>
-      <Accordion title="Another placeholder quote for Section Three">
-      - Placeholder paragraph for Section Three, Quote 2.
+      <Accordion value="dehumanisation-2" title={<span className="new-york" style={{ color: 'var(--color-fd-muted-foreground)', fontStyle: 'italic' }}>"Another placeholder quote for Dehumanisation."</span>}>
+        Placeholder paragraph for Dehumanisation, Quote 2.
+      </Accordion>
+    </Accordions>
+  </TabsContent>
+
+  <TabsContent value="addiction">
+    <Accordions type="single">
+      <Accordion value="addiction-1" title={<span className="new-york" style={{ color: 'var(--color-fd-muted-foreground)', fontStyle: 'italic' }}>"Placeholder quote for Addiction."</span>}>
+        Placeholder paragraph for Addiction, Quote 1.
+      </Accordion>
+      <Accordion value="addiction-2" title={<span className="new-york" style={{ color: 'var(--color-fd-muted-foreground)', fontStyle: 'italic' }}>"Another placeholder quote for Addiction."</span>}>
+        Placeholder paragraph for Addiction, Quote 2.
       </Accordion>
     </Accordions>
   </TabsContent>

@@ -14,14 +14,14 @@ import {
 	TabsContent,
 	Tab,
 } from "fumadocs-ui/components/tabs";
-import {
-	Ghost,
-	Heart,
-	Building2,
-	Mountain,
-	Unlink2,
-	Pill,
-} from "lucide-react";
+import * as LucideIcons from "lucide-react";
+import type { LucideProps } from "lucide-react";
+
+// Use <Icon name="AnyLucideIconName" /> in MDX — no need to pre-import icons individually
+const Icon = ({ name, ...props }: { name: string } & LucideProps) => {
+	const IconComponent = (LucideIcons as unknown as Record<string, React.ComponentType<LucideProps>>)[name];
+	return IconComponent ? <IconComponent {...props} /> : null;
+};
 
 const Highlight = (props: React.PropsWithChildren<{ className?: string }>) => (
 	<span
@@ -56,12 +56,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
 		Steps,
 		TabsContent,
 		Tab,
-		Ghost,
-		Heart,
-		Building2,
-		Mountain,
-		Unlink2,
-		Pill,
+		Icon,
 		img: (props) => (
 			<ImageZoom {...(props as any)} width="400" className="rounded-[10px]" />
 		),
