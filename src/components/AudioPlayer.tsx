@@ -3,7 +3,8 @@
 import { useAudioPlayer } from "react-use-audio-player";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Play, Pause, Volume2 } from "lucide-react";
+import { Play, Pause, Volume2, VolumeOff } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function AudioPlayer() {
 	const pathname = usePathname();
@@ -46,10 +47,18 @@ export function AudioPlayer() {
 				backdropFilter: "blur(8px)",
 			}}
 		>
-			<Volume2
-				size={20}
-				style={{ color: "var(--color-fd-primary)", flexShrink: 0 }}
-			/>
+			{isPlaying ? (
+				<Volume2
+					size={20}
+					style={{ color: "var(--color-fd-primary)", flexShrink: 0 }}
+				/>
+			) : (
+				<VolumeOff
+					size={20}
+					style={{ color: "var(--color-fd-primary)", flexShrink: 0 }}
+				/>
+            )}
+            
 			<button
 				onClick={togglePlayPause}
 				disabled={!isReady && !isLoading}
