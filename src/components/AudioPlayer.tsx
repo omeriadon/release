@@ -37,7 +37,7 @@ export function AudioPlayer() {
 	useEffect(() => {
 		if (loadedSrc !== src) {
 			load(src, {
-				initialVolume: 0.6,
+				initialVolume: 1,
 				loop: true,
 				autoplay: isPlaying, // keep playing if already playing
 			});

@@ -42,7 +42,7 @@ export function FireAshEffect({ enabled }: { enabled: boolean }) {
 				duration: Math.random() * 8 + 8, // 8-16s
 				delay: Math.random() * 5, // 0-5s
 				rotation: Math.random() * 360,
-				blur: Math.random() * 3, // 0px to 3px blur
+				blur: Math.random() * 2, // 0px to 3px blur
 			};
 		};
 
