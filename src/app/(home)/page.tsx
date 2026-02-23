@@ -17,12 +17,12 @@ export default function HomePage() {
 			{/* Content */}
 			<div className="relative z-10">
 				<h1 className="text-8xl font-bold text-fd-primary italic mb-4 new-york">Driving Back (In) Ashes</h1>
-				<h2 className="text-xl text-fd-primary/50 mb-16">
+				<h2 className="text-xl text-fd-primary/50 mb-16 new-york">
 					By Diobett, Bee, and Adon.
 				</h2>
 				<p className="text-white/80">
 					Go to our submission{" "}
-					<Link href="/docs" className="font-medium text-fd-primary underline">
+					<Link href="/docs" className="font-bold text-fd-primary underline">
 						here
 					</Link>
 					.
