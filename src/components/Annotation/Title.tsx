@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { cn } from "@/lib/cn";
 
 const RELEASES = [
 	{
@@ -32,34 +33,17 @@ const ReleaseCard = ({
 	<div
 		onMouseEnter={onEnter}
 		onMouseLeave={onLeave}
-		style={{
-			flex: "1 1 220px",
-			background: hovered ? "var(--color-fd-popover)" : "var(--color-fd-card)",
-			border: `1px solid ${hovered ? "var(--color-fd-accent)" : "var(--color-fd-border)"}`,
-			borderRadius: "20px",
-			padding: "1.25rem",
-			transition: "background 0.18s, border-color 0.18s",
-			cursor: "default",
-		}}
+		className={cn(
+			"flex-1 basis-55 rounded-[20px] p-5 border cursor-default transition-colors duration-180",
+			hovered
+				? "bg-fd-popover border-fd-accent"
+				: "bg-fd-card border-fd-border",
+		)}
 	>
-		<h3
-			style={{
-				color: "var(--color-fd-foreground)",
-				fontSize: "0.95rem",
-				fontWeight: 600,
-				margin: "0 0 0.6rem 0",
-			}}
-		>
+		<h3 className="text-fd-foreground text-[0.95rem] font-semibold m-0 mb-[0.6rem]">
 			{title}
 		</h3>
-		<p
-			style={{
-				color: "var(--color-fd-muted-foreground)",
-				fontSize: "0.82rem",
-				lineHeight: 1.65,
-				margin: 0,
-			}}
-		>
+		<p className="text-fd-muted-foreground text-[0.82rem] leading-[1.65] m-0">
 			{description}
 		</p>
 	</div>
@@ -69,7 +53,6 @@ export const Title = (props: {
 	className?: string;
 }) => {
 	const [open, setOpen] = useState(false);
-	const [titleHovered, setTitleHovered] = useState(false);
 	const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
 	useEffect(() => {
@@ -92,23 +75,14 @@ export const Title = (props: {
 		<>
 			{/* Clickable title */}
 			<span
-				className={props.className ?? ""}
+				className={cn(
+					"border-[1.7px] border-fd-primary/60 text-fd-primary",
+					"hover:border-transparent hover:bg-fd-primary/60 hover:text-white",
+					"py-[0.8rem] px-[0.6rem] rounded-[15px] cursor-pointer text-5xl font-bold inline-block",
+					"transition-all duration-200 select-none",
+					props.className,
+				)}
 				onClick={() => setOpen(true)}
-				onMouseEnter={() => setTitleHovered(true)}
-				onMouseLeave={() => setTitleHovered(false)}
-				style={{
-					border: `1.7px solid ${titleHovered ? "transparent" : "rgba(16, 179, 171, 0.6)"}`,
-					backgroundColor: titleHovered ? "rgba(16, 179, 171, 0.6)" : "transparent",
-					color: titleHovered ? "white" : "var(--color-fd-primary)",
-					padding: "0.8rem 0.6rem",
-					borderRadius: "15px",
-					cursor: "pointer",
-					fontSize: "3rem",
-					fontWeight: "bold",
-					display: "inline-block",
-					transition: "background-color 0.2s, color 0.2s, border-color 0.2s",
-					userSelect: "none",
-				}}
 			>
 				Release
 			</span>
@@ -116,102 +90,46 @@ export const Title = (props: {
 			{/* Backdrop */}
 			<div
 				onClick={() => setOpen(false)}
-				style={{
-					position: "fixed",
-					inset: 0,
-					zIndex: 9998,
-					display: "flex",
-					alignItems: "center",
-					justifyContent: "center",
-					padding: "1.5rem",
-					backgroundColor: "rgba(0,0,0,0.45)",
-					backdropFilter: open ? "blur(10px)" : "blur(0px)",
-					WebkitBackdropFilter: open ? "blur(10px)" : "blur(0px)",
-					opacity: open ? 1 : 0,
-					pointerEvents: open ? "auto" : "none",
-					transition: "opacity 0.28s ease, backdrop-filter 0.28s ease",
-				}}
+				className={cn(
+				"fixed inset-0 z-9998 flex items-center justify-center p-6",
+				"bg-black/45 transition-[opacity,backdrop-filter] duration-280 ease-in-out",
+					open
+						? "opacity-100 pointer-events-auto backdrop-blur-[10px]"
+						: "opacity-0 pointer-events-none backdrop-blur-none",
+				)}
 			>
 				{/* Modal panel */}
 				<div
 					onClick={(e) => e.stopPropagation()}
-					style={{
-						background: "var(--color-fd-popover)",
-						border: "1px solid var(--color-fd-border)",
-						borderRadius: "40px",
-						padding: "1.75rem",
-						maxWidth: "900px",
-						width: "100%",
-						boxShadow: "0 24px 50px rgba(0,0,0,0.22)",
-						transform: open ? "scale(1)" : "scale(0.96)",
-						opacity: open ? 1 : 0,
-						filter: open ? "blur(0px)" : "blur(6px)",
-						transition: "transform 0.28s ease, opacity 0.28s ease, filter 0.28s ease",
-						zIndex: 9999,
-					}}
+					className={cn(
+						"bg-fd-popover border border-fd-border rounded-[40px] p-7 max-w-225 w-full z-9999",
+						"shadow-[0_24px_50px_rgba(0,0,0,0.22)]",
+						"transition-[transform,opacity,filter] duration-280 ease-in-out",
+						open
+							? "scale-100 opacity-100 blur-none"
+							: "scale-[0.96] opacity-0 blur-[6px]",
+					)}
 				>
 					{/* Header */}
-					<div
-						style={{
-							display: "flex",
-							justifyContent: "space-between",
-							alignItems: "flex-start",
-							marginBottom: "1.25rem",
-						}}
-					>
+					<div className="flex justify-between items-start mb-5">
 						<div>
-							<h2
-								style={{
-									color: "var(--color-fd-foreground)",
-									fontSize: "1.35rem",
-									fontWeight: 700,
-									margin: 0,
-									fontFamily: "NewYork",
-								}}
-							>
+							<h2 className="text-fd-foreground text-[1.35rem] font-bold m-0 new-york">
 								"Release"
 							</h2>
-							<p
-								style={{
-									color: "var(--color-fd-muted-foreground)",
-									fontSize: "0.78rem",
-									margin: "0.25rem 0 0 0",
-								}}
-							>
+							<p className="text-fd-muted-foreground text-[0.78rem] mt-1 mb-0 mx-0">
 								Polysemic - multiple meanings distinguished by context
 							</p>
 						</div>
 						<button
 							onClick={() => setOpen(false)}
-							onMouseEnter={(e) => {
-								(e.currentTarget as HTMLButtonElement).style.color =
-									"var(--color-fd-foreground)";
-								(e.currentTarget as HTMLButtonElement).style.scale = "1.1";
-							}}
-							onMouseLeave={(e) => {
-								(e.currentTarget as HTMLButtonElement).style.color =
-									"var(--color-fd-muted-foreground)";
-								(e.currentTarget as HTMLButtonElement).style.scale = "1";
-
-							}}
-							style={{
-								background: "transparent",
-								border: "none",
-								color: "var(--color-fd-muted-foreground)",
-								cursor: "pointer",
-								fontSize: "1.1rem",
-								padding: "0.2rem 0.4rem",
-								lineHeight: 1,
-								borderRadius: "10px",
-								transition: "all 0.15s",
-							}}
+							className="bg-transparent border-none text-fd-muted-foreground hover:text-fd-foreground cursor-pointer text-[1.1rem] py-[0.2rem] px-[0.4rem] leading-none rounded-[10px] transition-all duration-150 hover:scale-110"
 						>
 							✕
 						</button>
 					</div>
 
 					{/* Three cards */}
-					<div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
+					<div className="flex gap-3 flex-wrap">
 						{RELEASES.map((r, i) => (
 							<ReleaseCard
 								key={r.title}

@@ -12,7 +12,7 @@ export const Annotation = (
 	<span
 		{...rest}
 		style={{
-			border: "1.7px solid rgba(16, 179, 171, 0.6)",
+			border: "1.7px solid var(--color-fd-primary)",
 			padding: "0.1rem 0.2rem",
 			borderRadius: author ? "10px" : "5px",
 			position: "relative",
@@ -47,7 +47,7 @@ export const Annotation = (
 				tooltip.style.opacity = "1";
 			}
 			e.currentTarget.style.border = "1.7px solid transparent";
-			e.currentTarget.style.backgroundColor = "rgba(16, 179, 171, 0.6)";
+			e.currentTarget.style.backgroundColor = "var(--color-fd-primary)";
 			if (author) e.currentTarget.style.color = "white";
 		}}
 		onMouseLeave={(e) => {
@@ -61,7 +61,7 @@ export const Annotation = (
 				tooltip.addEventListener("transitionend", onEnd);
 			}
 			e.currentTarget.style.backgroundColor = "transparent";
-			e.currentTarget.style.border = "1.7px solid rgba(16, 179, 171, 0.6)";
+			e.currentTarget.style.border = "1.7px solid var(--color-fd-primary)";
 			if (author) e.currentTarget.style.color = "";
 		}}
 	>
