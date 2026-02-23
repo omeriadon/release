@@ -59,6 +59,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
 		Tab,
 		Icon,
 		SectionAudioPlayer,
+		ImageZoom,
 		img: (props) => (
 			<ImageZoom {...(props as any)} width="400" className="rounded-[10px]" />
 		),
