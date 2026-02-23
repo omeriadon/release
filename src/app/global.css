@@ -4,7 +4,46 @@
 
 :root {
 	--fd-layout-width: 100vw;
-	--color-fd-primary: #10b3ab;
+}
+
+@theme {
+  /* Light mode — warm sand, ochre, and dry-earth tones */
+  --color-fd-background: hsl(35, 28%, 95%);
+  --color-fd-foreground: hsl(20, 50%, 10%);
+  --color-fd-muted: hsl(30, 22%, 89%);
+  --color-fd-muted-foreground: hsl(22, 28%, 42%);
+  --color-fd-popover: hsl(35, 28%, 97%);
+  --color-fd-popover-foreground: hsl(20, 40%, 12%);
+  --color-fd-card: hsl(30, 22%, 91%);
+  --color-fd-card-foreground: hsl(20, 50%, 10%);
+  --color-fd-border: hsla(18, 45%, 55%, 35%);
+  --color-fd-primary: hsl(20, 82%, 40%);
+  --color-fd-primary-foreground: hsl(35, 60%, 97%);
+  --color-fd-secondary: hsl(25, 22%, 86%);
+  --color-fd-secondary-foreground: hsl(20, 45%, 12%);
+  --color-fd-accent: hsla(12, 65%, 52%, 30%);
+  --color-fd-accent-foreground: hsl(20, 50%, 10%);
+  --color-fd-ring: hsl(20, 72%, 52%);
+}
+
+.dark {
+  /* Dark mode — deep red-brown outback night */
+  --color-fd-background: hsl(15, 28%, 7%);
+  --color-fd-foreground: hsl(30, 38%, 88%);
+  --color-fd-muted: hsl(18, 22%, 13%);
+  --color-fd-muted-foreground: hsla(28, 32%, 68%, 0.8);
+  --color-fd-popover: hsl(15, 28%, 10%);
+  --color-fd-popover-foreground: hsl(30, 30%, 84%);
+  --color-fd-card: hsl(15, 26%, 9%);
+  --color-fd-card-foreground: hsl(30, 38%, 92%);
+  --color-fd-border: hsla(18, 45%, 38%, 22%);
+  --color-fd-primary: hsl(22, 88%, 56%);
+  --color-fd-primary-foreground: hsl(18, 50%, 7%);
+  --color-fd-secondary: hsl(18, 22%, 14%);
+  --color-fd-secondary-foreground: hsl(30, 35%, 88%);
+  --color-fd-accent: hsla(12, 55%, 42%, 32%);
+  --color-fd-accent-foreground: hsl(28, 40%, 88%);
+  --color-fd-ring: hsl(22, 75%, 48%);
 }
 
 @font-face {
