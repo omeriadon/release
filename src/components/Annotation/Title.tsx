@@ -7,17 +7,23 @@ import { motion, AnimatePresence } from "framer-motion";
 const RELEASES = [
 	{
 		title: "Release from Tension",
-		description:
-			"Esse qui id minim quis voluptate id cillum. Duis esse deserunt ipsum sit ex. Enim deserunt eu irure ipsum nostrud laborum est ullamco voluptate. Aliqua tempor ea anim ullamco commodo occaecat do. Non elit magna esse eiusmod sunt. Labore adipisicing mollit incididunt magna labore ullamco enim proident. Deserunt cupidatat esse officia enim amet adipisicing esse mollit quis in.",
+		description: `A man returning from imprisonment would be the first impression of the reader.
+        Bull had served “chapters” in detention in the past, so it is the implied
+        “release” that happened before the story’s beginning.
+
+        The word “guest” in quotation marks is ironic when paired with imprisonment.`,
 	},
 	{
 		title: "Release from Prison",
-		description: `Tempor cupidatat velit commodo labore veniam pariatur fugiat. Pariatur reprehenderit velit ipsum qui culpa enim ad nisi magna. Duis sint magna ea nisi aliqua aute esse veniam tempor nisi est magna velit. Dolor aute deserunt id enim cillum duis Lorem proident anim ipsum nulla aliquip. Anim elit deserunt pariatur minim officia enim incididunt cillum. Irure consequat duis ea anim occaecat do nostrud eiusmod nisi labore. Non aliquip sit cillum deserunt adipisicing adipisicing sunt.`,
+		description: `The next phase is the spiritual release for Bull and Danny, where Bull’s remains are scattered back into Wakka Wakka land.  The country welcomes back Bull with warmth that a cold system couldn’t match.
+        
+		"Finally at rest in playful communion with the country."`,
 	},
 	{
 		title: "Release from Life",
-		description:
-			"Officia officia ullamco nulla officia adipisicing deserunt labore laborum adipisicing. Adipisicing qui mollit officia consectetur laboris amet fugiat laborum ea duis incididunt. Id do consequat nostrud mollit qui dolor ut Lorem in quis sit nostrud tempor do. Cupidatat amet officia ullamco. Nisi labore fugiat reprehenderit et laborum ullamco dolor pariatur aliquip aliquip voluptate velit.",
+		description: `At first, the central fact of Bull’s passing is hidden, until suspicions are revealed after Danny talks to Bull’s ashes. The reader’s release from uncertainty is cathartic. 
+
+        "He let the ash sift before him into the night."`,
 	},
 ];
 
@@ -42,7 +48,7 @@ const ReleaseCard = ({
 				: "bg-fd-card border-fd-border",
 		)}
 	>
-		<h3 className="text-fd-foreground text-[0.95rem] font-semibold m-0 mb-[0.6rem]">
+		<h3 className="text-fd-foreground text-[0.95rem] font-semibold m-0 mt-0 mb-[0.6rem]">
 			{title}
 		</h3>
 		<p className="text-fd-muted-foreground text-[0.82rem] leading-[1.65] m-0">
