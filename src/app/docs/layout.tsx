@@ -16,11 +16,10 @@ export default function Layout({ children }: LayoutProps<"/docs">) {
 				title: (
 					<>
 						<BookText
-							className="size-9 stroke-[2.5]"
-							// fill="var(--color-fd-primary)"
+							className="size-9 stroke-[2.2]"
 							stroke="var(--color-fd-primary)"
 						/>
-						<span className="font-bold text-2xl text-fd-primary">Release</span>
+						<span className="font-bold text-3xl text-fd-primary new-york">Release</span>
 					</>
 				),
 			}}
