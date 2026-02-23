@@ -6,6 +6,7 @@ import { Annotation } from "./components/Annotation/Annotation";
 import { MurgonMap } from "./components/Map/Maps";
 import { Title } from "./components/Annotation/Title";
 import { Mermaid } from "./components/Annotation/Mermaid";
+import { SectionAudioPlayer } from "./components/SectionAudioPlayer";
 import { Step, Steps } from "fumadocs-ui/components/steps";
 import {
 	Tabs,
@@ -57,6 +58,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
 		TabsContent,
 		Tab,
 		Icon,
+		SectionAudioPlayer,
 		img: (props) => (
 			<ImageZoom {...(props as any)} width="400" className="rounded-[10px]" />
 		),

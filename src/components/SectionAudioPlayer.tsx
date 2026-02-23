@@ -1,63 +1,54 @@
 "use client";
 
 import { useAudioPlayer } from "react-use-audio-player";
-import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
 import { Play, Pause, Volume2, VolumeOff } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { registerAudioPlayer, stopAllExcept } from "@/lib/audioRegistry";
 
-export function AudioPlayer() {
-	const pathname = usePathname();
-	const isDrivePage = pathname === "/docs/the-drive";
-	const src = isDrivePage ? "/sound/car.mp3" : "/sound/general.mp3";
+export interface AudioPlayerHandle {
+	stop: () => void;
+}
 
-	const { load, play, stop, togglePlayPause, isPlaying, isReady, isLoading } =
+// ---------------------------------------------------------------------------
+// SectionAudioPlayer
+// ---------------------------------------------------------------------------
+export const SectionAudioPlayer = forwardRef<AudioPlayerHandle, { src: string }>(
+function SectionAudioPlayer({ src }, ref) {
+	const { load, play, stop, isPlaying, isReady, isLoading } =
 		useAudioPlayer();
 
+	// Keep a stable ref to the stop function so registry entry never stales.
 	const stopRef = useRef<() => void>(stop);
 	useEffect(() => {
 		stopRef.current = stop;
 	});
 
-	const [loadedSrc, setLoadedSrc] = useState<string | null>(null);
-
-	// Register this player in the global registry.
 	useEffect(() => {
+		load(src, { initialVolume: 0.8 });
 		const stableFn = () => stopRef.current();
 		const unregister = registerAudioPlayer(stableFn);
 		return () => {
 			unregister();
+			stopRef.current();
 		};
-	}, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-	// Load audio on first mount and when track needs to change
-	useEffect(() => {
-		if (loadedSrc !== src) {
-			load(src, {
-				initialVolume: 0.6,
-				loop: true,
-				autoplay: isPlaying, // keep playing if already playing
-			});
-			setLoadedSrc(src);
-		}
 	}, [src]); // eslint-disable-line react-hooks/exhaustive-deps
 
-	const handleToggle = () => {
+	useImperativeHandle(ref, () => ({ stop: () => stopRef.current() }));
+
+	const handleClick = () => {
 		if (!isPlaying) {
 			stopAllExcept(stopRef.current);
+			play();
+		} else {
+			stop();
 		}
-		togglePlayPause();
 	};
 
 	return (
 		<div
 			style={{
-				position: "fixed",
-				bottom: "1.25rem",
-				right: "1.25rem",
-				zIndex: 50,
-				display: "flex",
+				display: "inline-flex",
 				alignItems: "center",
 				gap: "0.7rem",
 				border: "1px solid var(--color-fd-border)",
@@ -65,8 +56,10 @@ export function AudioPlayer() {
 				padding: "0.4rem 0.4rem 0.4rem 0.7rem",
 				boxShadow: "0 2px 12px rgba(0,0,0,0.15)",
 				backgroundColor: "var(--color-fd-card)",
-				background: "color-mix(in srgb, var(--color-fd-card) 50%, transparent)",
+				background:
+					"color-mix(in srgb, var(--color-fd-card) 50%, transparent)",
 				backdropFilter: "blur(8px)",
+				flexShrink: 0,
 			}}
 		>
 			<AnimatePresence mode="wait">
@@ -100,7 +93,7 @@ export function AudioPlayer() {
 			</AnimatePresence>
 
 			<button
-				onClick={handleToggle}
+				onClick={handleClick}
 				disabled={!isReady && !isLoading}
 				aria-label={isPlaying ? "Pause" : "Play"}
 				style={{
@@ -121,11 +114,7 @@ export function AudioPlayer() {
 				}}
 			>
 				{isPlaying ? (
-					<Pause
-						size={12}
-						fill="white"
-						stroke="white"
-					/>
+					<Pause size={12} fill="white" stroke="white" />
 				) : (
 					<Play
 						size={12}
@@ -136,4 +125,6 @@ export function AudioPlayer() {
 			</button>
 		</div>
 	);
-}
+});
+
+SectionAudioPlayer.displayName = "SectionAudioPlayer";

@@ -1,6 +1,8 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/cn";
+import { SectionAudioPlayer, type AudioPlayerHandle } from "@/components/SectionAudioPlayer";
+import { motion, AnimatePresence } from "framer-motion";
 
 const RELEASES = [
 	{
@@ -54,10 +56,16 @@ export const Title = (props: {
 }) => {
 	const [open, setOpen] = useState(false);
 	const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+	const audioRef = useRef<AudioPlayerHandle>(null);
+
+	const handleClose = () => {
+		audioRef.current?.stop();
+		setOpen(false);
+	};
 
 	useEffect(() => {
 		const onKey = (e: KeyboardEvent) => {
-			if (e.key === "Escape") setOpen(false);
+			if (e.key === "Escape") handleClose();
 		};
 		if (open) {
 			document.addEventListener("keydown", onKey);
@@ -69,7 +77,7 @@ export const Title = (props: {
 			document.removeEventListener("keydown", onKey);
 			document.body.style.overflow = "";
 		};
-	}, [open]);
+	}, [open]); // eslint-disable-line react-hooks/exhaustive-deps
 
 	return (
 		<>
@@ -78,7 +86,7 @@ export const Title = (props: {
 				className={cn(
 					"border-[1.7px] border-fd-primary/60 text-fd-primary",
 					"hover:border-transparent hover:bg-fd-primary/60 hover:text-white",
-					"py-[0.8rem] px-[0.6rem] rounded-[15px] cursor-pointer text-5xl font-bold inline-block",
+					"py-2 px-[0.6rem] rounded-[20px] cursor-pointer text-5xl font-bold inline-block",
 					"transition-all duration-200 select-none",
 					props.className,
 				)}
@@ -87,61 +95,87 @@ export const Title = (props: {
 				Release
 			</span>
 
-			{/* Backdrop */}
-			<div
-				onClick={() => setOpen(false)}
-				className={cn(
-				"fixed inset-0 z-9998 flex items-center justify-center p-6",
-				"bg-black/45 transition-[opacity,backdrop-filter] duration-280 ease-in-out",
-					open
-						? "opacity-100 pointer-events-auto backdrop-blur-[10px]"
-						: "opacity-0 pointer-events-none backdrop-blur-none",
-				)}
-			>
-				{/* Modal panel */}
-				<div
-					onClick={(e) => e.stopPropagation()}
-					className={cn(
-						"bg-fd-popover border border-fd-border rounded-[40px] p-7 max-w-225 w-full z-9999",
-						"shadow-[0_24px_50px_rgba(0,0,0,0.22)]",
-						"transition-[transform,opacity,filter] duration-280 ease-in-out",
-						open
-							? "scale-100 opacity-100 blur-none"
-							: "scale-[0.96] opacity-0 blur-[6px]",
-					)}
-				>
-					{/* Header */}
-					<div className="flex justify-between items-start mb-5">
-						<div>
-							<h2 className="text-fd-foreground text-[1.35rem] font-bold m-0 new-york">
-								"Release"
-							</h2>
-							<p className="text-fd-muted-foreground text-[0.78rem] mt-1 mb-0 mx-0">
-								Polysemic - multiple meanings distinguished by context
-							</p>
-						</div>
-						<button
-							onClick={() => setOpen(false)}
-							className="bg-transparent border-none text-fd-muted-foreground hover:text-fd-foreground cursor-pointer text-[1.1rem] py-[0.2rem] px-[0.4rem] leading-none rounded-[10px] transition-all duration-150 hover:scale-110"
+			<AnimatePresence>
+				{open && (
+					<motion.div
+						key="backdrop"
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						exit={{ opacity: 0 }}
+						transition={{ duration: 0.15 }}
+						onClick={handleClose}
+						style={{
+							position: "fixed",
+							inset: 0,
+							zIndex: 9998,
+							display: "flex",
+							flexDirection: "column",
+							alignItems: "center",
+							justifyContent: "center",
+							padding: "1.5rem",
+							gap: "0.75rem",
+							backgroundColor: "rgba(0,0,0,0.45)",
+							backdropFilter: "blur(10px)",
+						}}
+					>
+						{/* Floating audio button – detached above modal, aligned right */}
+						<div
+							className="max-w-225 w-full flex justify-end"
+							onClick={(e) => e.stopPropagation()}
 						>
-							✕
-						</button>
-					</div>
-
-					{/* Three cards */}
-					<div className="flex gap-3 flex-wrap">
-						{RELEASES.map((r, i) => (
-							<ReleaseCard
-								key={r.title}
-								{...r}
-								hovered={hoveredCard === i}
-								onEnter={() => setHoveredCard(i)}
-								onLeave={() => setHoveredCard(null)}
+							<SectionAudioPlayer
+								ref={audioRef}
+								src="/sound/three%20meanings.m4a"
 							/>
-						))}
-					</div>
-				</div>
-			</div>
+						</div>
+
+						{/* Modal panel */}
+						<motion.div
+							key="panel"
+							initial={{ scale: 0.96, opacity: 0, filter: "blur(10px)" }}
+							animate={{ scale: 1, opacity: 1, filter: "blur(0px)" }}
+							exit={{ scale: 0.96, opacity: 0, filter: "blur(6px)" }}
+							transition={{ duration: 0.3, ease: "easeInOut" }}
+							onClick={(e) => e.stopPropagation()}
+							className="bg-fd-popover border border-fd-border rounded-[40px] p-6 max-w-225 w-full z-9999 shadow-[0_24px_50px_rgba(0,0,0,0.22)]"
+						>
+							{/* Header */}
+							<div className="mb-4">
+								<div className="flex items-start gap-2">
+									<h2
+										className="text-fd-foreground text-[3rem] font-bold m-0 new-york"
+										style={{ lineHeight: 1 }}
+									>
+										"Release"
+									</h2>
+									<button
+										onClick={handleClose}
+										className="ml-auto shrink-0 bg-transparent border-none text-fd-muted-foreground hover:text-fd-primary cursor-pointer text-[1.6rem] leading-none rounded-[10px] transition-all duration-150 hover:scale-110"
+									>
+										✕
+									</button>
+								</div>
+								<p className="text-fd-muted-foreground text-[0.78rem] mt-1 mb-0 mx-0">
+									Polysemic - multiple meanings distinguished by context
+								</p>
+							</div>
+
+							{/* Three cards */}
+							<div className="flex gap-3 flex-wrap">
+								{RELEASES.map((r, i) => (
+									<ReleaseCard
+										key={r.title}
+										{...r}
+										hovered={hoveredCard === i}
+										onEnter={() => setHoveredCard(i)}
+										onLeave={() => setHoveredCard(null)}
+									/>
+								))}
+							</div>
+						</motion.div>
+					</motion.div>
+				)}
+			</AnimatePresence>
 		</>
 	);
 };
