@@ -125,7 +125,7 @@ export const Title = (props: {
 						>
 							<SectionAudioPlayer
 								ref={audioRef}
-								src="/sound/three%20meanings.m4a"
+								src="/sound/diobett/three%20meanings.m4a"
 							/>
 						</div>
 
